@@ -9,10 +9,10 @@ if(validator.validate(mail)){
 	console.log('email OK');
 	axios({
 		method: 'get',
-		url: `https://haveibeenpwned.com/api/${mail}`,
+		url: `https://haveibeenpwned.com/api/v2/breachedaccount/${mail}`,
 		header:{
 			'api-version': '2',
-			'user-agent': "nondidju"
+			'user-agent': "mynodejs"
 		}
 	})
 		.then(function(reponse){
