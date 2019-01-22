@@ -1,10 +1,12 @@
-#!/usr/bin/env node
+t #!/usr/bin/env node
 
 const axios = require('axios');
 const validator = require("email-validator");
 const ora = require('ora');
 const chalk = require('chalk');
 const figlet = require('figlet');
+
+var term = require( 'terminal-kit' ).terminal ;
 
 
 let mail = process.argv[2];
@@ -26,12 +28,32 @@ if(validator.validate(mail)){
 		}
 	})
 		.then(function(response){
-			var bo = response.data.map(({Name}) => Name);
-			console.log(chalk.red(chalk.bgYellow(bo)));
+				term.drawImage(
+					'./as.jpg',
+					{shrink:{ 
+						width: 25, 
+						height: 50, 
+					}}
+				) ;
+
+			console.log(figlet.textSync(' Oh no — pwned!', {
+			    // font: 'Ghost',
+			    horizontalLayout: 'default',
+			    verticalLayout: 'default'
+			}));
+			// var bo = response.data.map(({Name}) => Name);
+			// console.log(chalk.red(chalk.bgYellow(bo)));
+
+			console.log(response.data.map(({Name}) => Name));
 
 		})
 		.catch(function(error){
 			if(error.response.status == 404){
+				console.log(figlet.textSync('Good news — no pwnage found!', {
+			    // font: 'Ghost',
+			    horizontalLayout: 'default',
+			    verticalLayout: 'default'
+			}));
 				console.log(chalk.yellow(chalk.bgRed('votre adresse est clean !')));
 			}
 			if(error.status == 403){
