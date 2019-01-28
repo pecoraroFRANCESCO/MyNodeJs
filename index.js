@@ -1,4 +1,4 @@
-t #!/usr/bin/env node
+#!/usr/bin/env node
 
 const axios = require('axios');
 const validator = require("email-validator");
